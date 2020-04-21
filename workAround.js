@@ -1,20 +1,22 @@
-// import Employee from "./employee";
 import {
-  Employee,
-  carde,
-  tax,
-  benefits,
-  bonus,
-  reimbursement,
+  getCadre,
+  calculateTax,
+  getBenefits,
+  calculateBonus,
+  reimbursementEligibility,
 } from "./employee";
+
+import Employee from "./employee";
 
 function getEmployeeInformation(inputSalary) {
   Employee.salary = inputSalary;
-  console.log("Cadre: " + cadre());
-  console.log("Tax: " + tax());
-  console.log("Benefits: " + benefits());
-  console.log("Bonus: " + bonus());
-  console.log("Reimbursement Eligibility: " + reimbursement() + "\n");
+  console.log("Cadre: " + getCadre());
+  console.log("Tax: " + calculateTax());
+  console.log("Benefits: " + getBenefits());
+  console.log("Bonus: " + calculateBonus());
+  console.log(
+    "Reimbursement Eligibility: " + reimbursementEligibility() + "\n"
+  );
 }
 
 getEmployeeInformation(10000);
