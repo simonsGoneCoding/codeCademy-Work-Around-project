@@ -1,4 +1,6 @@
-let salary = 100000;
+let Employee = {
+  salary: 100000,
+};
 
 let payGrades = {
   entryLevel: {
@@ -21,33 +23,33 @@ let payGrades = {
   },
 };
 
-function getCadre() {
+Employee.getCadre = function () {
   if (
-    salary >= payGrades.entryLevel.minSalary &&
-    salary <= payGrades.entryLevel.maxSalary
+    Employee.salary >= payGrades.entryLevel.minSalary &&
+    Employee.salary <= payGrades.entryLevel.maxSalary
   ) {
     return "entryLevel";
   } else if (
-    salary >= payGrades.midLevel.minSalary &&
-    salary <= payGrades.midLevel.maxSalary
+    Employee.salary >= payGrades.midLevel.minSalary &&
+    Employee.salary <= payGrades.midLevel.maxSalary
   ) {
     return "midLevel";
   } else return "seniorLevel";
-}
+};
 
-function calculateTax() {
-  return payGrades[getCadre()].taxMultiplier * salary;
-}
+Employee.calculateTax = function () {
+  return payGrades[Employee.getCadre()].taxMultiplier * Employee.salary;
+};
 
-function getBenefits() {
-  return payGrades[getCadre()].benefits.join(", ");
-}
+Employee.getBenefits = function () {
+  return payGrades[Employee.getCadre()].benefits.join(", ");
+};
 
-function calculateBonus() {
-  return 0.02 * salary;
-}
+Employee.calculateBonus = function () {
+  return 0.02 * Employee.salary;
+};
 
-function reimbursementEligibility() {
+Employee.reimbursementEligibility = function () {
   let reimbursementCosts = {
     health: 5000,
     housing: 8000,
@@ -55,24 +57,11 @@ function reimbursementEligibility() {
     gym: 12000,
   };
   let totalBenefitsValue = 0;
-  let employeeBenefits = payGrades[getCadre()].benefits;
+  let employeeBenefits = payGrades[Employee.getCadre()].benefits;
   for (let i = 0; i < employeeBenefits.length; i++) {
     totalBenefitsValue += reimbursementCosts[employeeBenefits[i]];
   }
   return totalBenefitsValue;
-}
+};
 
-function getEmployeeInformation(inputSalary) {
-  salary = inputSalary;
-  console.log("Cadre: " + getCadre());
-  console.log("Tax: " + calculateTax());
-  console.log("Benefits: " + getBenefits());
-  console.log("Bonus: " + calculateBonus());
-  console.log(
-    "Reimbursement Eligibility: " + reimbursementEligibility() + "\n"
-  );
-}
-
-getEmployeeInformation(10000);
-getEmployeeInformation(50000);
-getEmployeeInformation(100000);
+export default Employee;
